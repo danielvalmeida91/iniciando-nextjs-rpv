@@ -5,9 +5,17 @@ export default function Login() {
     const [password, setPassword] = useState('');
 
     async function submitLogin() {
-        const response = await fetch('http://localhost:3000/api/login')
-        const data = await response.json()
-        console.log('Data: ', data)
+        try {
+            const response = await fetch('http://localhost:3000/api/login', {
+                method: "POST",
+
+                body: JSON.stringify({ username, password })
+            })
+            const data = await response.json()
+            console.log('Data: ', data)
+        } catch (error) {
+            console.error(error)
+        }
     }
     return (
         <div className="w-full h-screen flex items-center justify-center">
